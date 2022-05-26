@@ -1,0 +1,39 @@
+<div class="container container-fluid" style="border:2px solid black;">
+    <h4>אנשי קשר</h4>
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>מועדף</th>
+                <th>שם איש קשר</th>
+                <th>סוג</th>
+                <th>כתובת</th>
+                <th>טלפון נייד</th>
+                <th>מייל</th>
+            </tr>
+        </thead>
+                <tr *ngFor="let contact of ser.Process.contactPersons">
+                    <td><input type="checkbox" [checked]="contact.deliveryFlag"></td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.type.value}}</td>
+                    <td>{{contact.address}}</td>
+                    <td>{{contact.phoneNumber}}</td>
+                    <td>{{contact.email}}</td>
+
+                </tr>
+                <tr *ngIf="showAddContact">
+                    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+                    <td> 
+                        <!-- <input type="checkbox" class="form-control"id="deliveryFlag" #deliveryFlag="ngModel" [(ngModel)]="ser.Process.contactPersons.deliveryFlag"> -->
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+</form>
+                </tr>
+                <button type="button" (click)="showAddContact=true" class="btn btn-link btn-xs pull-right"><b>+</b> הוסף איש קשר</button>
+ 
+    </table>
+</div>

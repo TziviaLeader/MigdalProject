@@ -1,0 +1,18 @@
+<div class="container container-fluid" style="border:2px solid black;">
+    <h4>ריכוז אנשי קשר</h4>
+<div class="d-flex flex-row">
+    <div class="p-2">מספר אנשי קשר בתהליך:  </div>
+    <div class="p-2">
+        <p>{{ser.Process.contactPersons.length-1}}</p>
+    </div>
+    <div class="p-2">
+        <button type="button" class="btn btn-primary" (click)="addInsured()">הוספת מבוטח</button>
+    </div>
+    <div class="p-2">
+        <button type="button" class="btn btn-primary" (click)="resetAll()">איפוס מלא</button>
+    </div>
+    <div class="p-2">
+        <button type="button" class="btn btn-primary" (click)="resetContact()">איפוס איש קשר</button>
+    </div>
+</div>
+</div>

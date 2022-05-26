@@ -1,0 +1,110 @@
+<div class="container container-fluid" style="border:2px solid black;">
+<h4>ריכוז מידע בתהליך</h4>
+<div class="d-flex flex-row">
+    <div class="p-2">פרטי מבוטח:  </div>
+    <div class="p-2">
+        <p class="pNotMargin">{{ser.Process.insured.firstName}}  {{ser.Process.insured.lastName}}</p>
+        <p>שם</p>
+    </div>
+    <div class="p-2">
+        <p class="pNotMargin">{{ser.Process.insured.identity}}</p>
+        <p>מס' זהות</p>
+    </div>
+    <div class="p-2">
+        <p class="pNotMargin">{{ser.Process.insured.age}}</p>
+        <p>גיל</p>
+    </div>
+    <div class="p-2">
+        <p class="pNotMargin">{{ser.Process.insured.address.streetName}} , {{ser.Process.insured.address.cityName}}</p>
+        <p>כתובת</p>
+    </div>
+  </div>
+
+<hr>
+
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div class="row">
+
+    <div class="form-group col-3" style="margin-right: 10px;">
+        <label for="superClaimType">סוג תביעת על:</label>
+        <select class="form-control" id="superClaimType"
+                required
+                [(ngModel)]="ser.Process.superClaim.superClaimType" name="superClaimType"
+                #superClaimType="ngModel">
+          <option [selected]></option>     
+          <option *ngFor="let st of ser.superClaimType" [value]="st">{{st.value}}</option>
+        </select>
+        <div [hidden]="superClaimType.valid || superClaimType.pristine" class="alert alert-danger">
+          שדה חובה
+        </div>
+    </div>
+        <div class="form-group col-3">
+            <label for="eventDate">תאריך הארוע:</label>
+            <input type="date" class="form-control" id="eventDate"
+                    required
+                    [(ngModel)]="ser.Process.superClaim.eventDate" name="eventDate"
+                    #eventDate="ngModel"/>
+            <div [hidden]="eventDate.valid || eventDate.pristine" class="alert alert-danger">
+              שדה חובה
+            </div>
+        </div>
+      </div>
+
+<div class="row">
+      <div class="form-group col-3" style="margin-right: 10px;">
+        <label for="claimCause">סיבת הארוע:</label>
+        <select class="form-control" id="claimCause"
+                required (click)="ifclaimCauseChoose=false"
+                [(ngModel)]="ser.Process.superClaim.claimCause" name="claimCause"
+                #claimCause="ngModel">
+          <option [selected]></option>     
+          <option *ngFor="let cause of ser.claimCause" [value]="cause" >{{cause.value}}</option>
+        </select>
+        <div [hidden]="claimCause.valid || claimCause.pristine" class="alert alert-danger">
+          שדה חובה
+        </div>
+       </div>
+
+        <div class="form-group col-3" style="margin-right: 10px;">
+            <label for="injuryType">מהות הארוע:</label>
+            <select class="form-control" id="injuryType" [disabled]="ifclaimCauseChoose"
+                    [(ngModel)]="ser.Process.superClaim.injuryType" name="injuryType"
+                    #injuryType="ngModel">
+              <option [selected]></option>     
+              <option *ngFor="let type of ser.injuryType" [value]="type">{{type.value}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-3" style="margin-right: 10px;">
+        <label for="submitedBy">הוגשה באמצעות:</label>
+        <select class="form-control" id="submitedBy"
+                required (click)="checkContact(submitedBy.value)"
+                [(ngModel)]="ser.Process.superClaim.submitedBy" name="submitedBy"
+                #submitedBy="ngModel">
+          <option *ngFor="let by of ser.contactPersonType_submitedBy" [value]="by.code" >{{by.value}}</option>
+        </select>
+        <div [hidden]="submitedBy.valid || submitedBy.pristine" class="alert alert-danger">
+          שדה חובה
+        </div>
+        <div [hidden]="existSomeType" class="alert alert-danger">
+          חייב להיות איש קשר מאותו סוג
+        </div>
+       </div>
+
+        <div class="form-group col-3" style="margin-right: 10px;">
+            <label for="submitionMethod">אופן קבלת התביעה:</label>
+            <select class="form-control" id="submitionMethod" 
+                    [(ngModel)]="ser.Process.superClaim.submitionMethod" name="submitionMethod"
+                    #submitionMethod="ngModel">
+              <option [selected]></option>     
+              <option *ngFor="let method of ser.submitionMethod" [value]="method">{{method.value}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button> -->
+
+</form>
+</div>
